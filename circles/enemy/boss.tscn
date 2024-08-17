@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://drphghpukokra"]
+
+[ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_1m1tn"]
+[ext_resource type="Script" path="res://circles/circle.gd" id="1_vrcms"]
+[ext_resource type="Script" path="res://circles/enemy/boss_attack.gd" id="2_iamu3"]
+[ext_resource type="PackedScene" uid="uid://dlpc78i40rpyo" path="res://circles/enemy/enemy.tscn" id="3_efvt0"]
+[ext_resource type="Script" path="res://circles/consumer.gd" id="4_dnj2b"]
+
+[node name="boss" type="Node2D" groups=["circle", "enemy"]]
+material = ExtResource("1_1m1tn")
+script = ExtResource("1_vrcms")
+radius = 256.0
+color = Color(1, 0, 0, 1)
+
+[node name="boss_attack" type="Node" parent="."]
+script = ExtResource("2_iamu3")
+projectile = ExtResource("3_efvt0")
+
+[node name="timer" type="Timer" parent="boss_attack"]
+process_callback = 0
+wait_time = 0.25
+autostart = true
+
+[node name="consumer" type="Node" parent="."]
+script = ExtResource("4_dnj2b")
+
+[connection signal="timeout" from="boss_attack/timer" to="boss_attack" method="fire_at_player"]

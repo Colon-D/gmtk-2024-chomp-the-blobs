@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://ugek5474byb7"]
+
+[ext_resource type="Script" path="res://gameplay.gd" id="1_amfpm"]
+[ext_resource type="PackedScene" uid="uid://dmc0n1p11jack" path="res://circles/friend/player.tscn" id="1_ye32a"]
+[ext_resource type="PackedScene" uid="uid://dlpc78i40rpyo" path="res://circles/enemy/enemy.tscn" id="2_m0668"]
+[ext_resource type="Script" path="res://circles/friend/player_camera.gd" id="2_ykh36"]
+[ext_resource type="Script" path="res://boundary.gd" id="3_5w352"]
+[ext_resource type="Script" path="res://fps.gd" id="6_btkyf"]
+[ext_resource type="PackedScene" uid="uid://drphghpukokra" path="res://circles/enemy/boss.tscn" id="7_ebj6r"]
+
+[node name="gameplay" type="Node"]
+script = ExtResource("1_amfpm")
+enemy = ExtResource("2_m0668")
+
+[node name="boundary" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, 0)
+script = ExtResource("3_5w352")
+size = Vector2(4096, 4096)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fps" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("6_btkyf")
+
+[node name="boss" parent="." instance=ExtResource("7_ebj6r")]
+position = Vector2(256, 0)
+
+[node name="player" parent="." instance=ExtResource("1_ye32a")]
+position = Vector2(-128, 0)
+
+[node name="camera" type="Camera2D" parent="."]
+script = ExtResource("2_ykh36")
+follow = NodePath("../player")

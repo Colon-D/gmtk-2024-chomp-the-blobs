@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlpc78i40rpyo"]
+
+[ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_hak0j"]
+[ext_resource type="Script" path="res://circles/circle.gd" id="1_um4fq"]
+[ext_resource type="Script" path="res://circles/enemy/enemy_movement.gd" id="2_wq0e0"]
+[ext_resource type="Script" path="res://circles/clamp.gd" id="3_msb3a"]
+[ext_resource type="Script" path="res://circles/consumer.gd" id="4_bf8mf"]
+
+[node name="enemy" type="Node2D" groups=["circle", "enemy"]]
+material = ExtResource("1_hak0j")
+script = ExtResource("1_um4fq")
+radius = 32.0
+color = Color(1, 0.498039, 0.498039, 1)
+
+[node name="movement" type="Node" parent="."]
+script = ExtResource("2_wq0e0")
+
+[node name="clamp" type="Node" parent="."]
+script = ExtResource("3_msb3a")
+
+[node name="consumer" type="Node" parent="."]
+script = ExtResource("4_bf8mf")
+
+[connection signal="edge" from="clamp" to="movement" method="bounce"]

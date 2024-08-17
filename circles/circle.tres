@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://diru3854wajpw"]
+
+[ext_resource type="Shader" path="res://circles/friend/player.gdshader" id="1_xgjf4"]
+
+[resource]
+shader = ExtResource("1_xgjf4")
