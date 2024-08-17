@@ -26,6 +26,7 @@ window/stretch/mode="canvas_items"
 player=""
 enemy=""
 circle=""
+boss=""
 
 [input]
 
@@ -81,4 +82,5 @@ common/physics_interpolation=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.461152, 0.766974, 1, 1)
 anti_aliasing/quality/screen_space_aa=1

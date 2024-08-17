@@ -1,27 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://drphghpukokra"]
+[gd_scene load_steps=11 format=3 uid="uid://drphghpukokra"]
 
 [ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_1m1tn"]
 [ext_resource type="Script" path="res://circles/circle.gd" id="1_vrcms"]
 [ext_resource type="Script" path="res://circles/enemy/boss_attack.gd" id="2_iamu3"]
 [ext_resource type="PackedScene" uid="uid://dlpc78i40rpyo" path="res://circles/enemy/enemy.tscn" id="3_efvt0"]
 [ext_resource type="Script" path="res://circles/consumer.gd" id="4_dnj2b"]
+[ext_resource type="Script" path="res://circles/circle_timer.gd" id="5_q0os7"]
+[ext_resource type="Script" path="res://circles/enemy/enemy_movement.gd" id="6_y7aep"]
+[ext_resource type="Script" path="res://circles/clamp.gd" id="7_jwb2p"]
+[ext_resource type="AudioStream" uid="uid://m6i36vuwqj0o" path="res://sfx/mud/mud.tres" id="9_e5y3t"]
+[ext_resource type="Script" path="res://circles/friend/play_mud.gd" id="10_l6h5b"]
 
-[node name="boss" type="Node2D" groups=["circle", "enemy"]]
+[node name="boss" type="Node2D" groups=["boss", "circle", "enemy"]]
 material = ExtResource("1_1m1tn")
 script = ExtResource("1_vrcms")
-radius = 256.0
+radius = 512.0
 color = Color(1, 0, 0, 1)
 
 [node name="boss_attack" type="Node" parent="."]
 script = ExtResource("2_iamu3")
 projectile = ExtResource("3_efvt0")
 
-[node name="timer" type="Timer" parent="boss_attack"]
-process_callback = 0
-wait_time = 0.25
+[node name="timer" type="Node" parent="boss_attack"]
+script = ExtResource("5_q0os7")
+wait_time = 0.05
 autostart = true
 
 [node name="consumer" type="Node" parent="."]
 script = ExtResource("4_dnj2b")
 
+[node name="movement" type="Node" parent="."]
+script = ExtResource("6_y7aep")
+
+[node name="clamp" type="Node" parent="."]
+script = ExtResource("7_jwb2p")
+
+[node name="mud" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_e5y3t")
+script = ExtResource("10_l6h5b")
+
+[connection signal="on_fire" from="boss_attack" to="mud" method="on_fire"]
 [connection signal="timeout" from="boss_attack/timer" to="boss_attack" method="fire_at_player"]
+[connection signal="on_consume" from="consumer" to="mud" method="on_consume"]
+[connection signal="edge" from="clamp" to="movement" method="bounce"]
+[connection signal="edge" from="clamp" to="mud" method="edge"]

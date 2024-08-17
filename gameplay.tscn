@@ -1,22 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://ugek5474byb7"]
+[gd_scene load_steps=9 format=3 uid="uid://ugek5474byb7"]
 
-[ext_resource type="Script" path="res://gameplay.gd" id="1_amfpm"]
 [ext_resource type="PackedScene" uid="uid://dmc0n1p11jack" path="res://circles/friend/player.tscn" id="1_ye32a"]
-[ext_resource type="PackedScene" uid="uid://dlpc78i40rpyo" path="res://circles/enemy/enemy.tscn" id="2_m0668"]
 [ext_resource type="Script" path="res://circles/friend/player_camera.gd" id="2_ykh36"]
 [ext_resource type="Script" path="res://boundary.gd" id="3_5w352"]
 [ext_resource type="Script" path="res://fps.gd" id="6_btkyf"]
+[ext_resource type="Texture2D" uid="uid://dklluqmulsp3v" path="res://water.jpg" id="6_pk3oy"]
 [ext_resource type="PackedScene" uid="uid://drphghpukokra" path="res://circles/enemy/boss.tscn" id="7_ebj6r"]
+[ext_resource type="Script" path="res://scroll_bg.gd" id="7_xsa5q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v5nmj"]
+blend_mode = 1
 
 [node name="gameplay" type="Node"]
-script = ExtResource("1_amfpm")
-enemy = ExtResource("2_m0668")
 
 [node name="boundary" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-2, 0)
 script = ExtResource("3_5w352")
-size = Vector2(4096, 4096)
+size = Vector2(2048, 2048)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -31,11 +32,34 @@ size_flags_vertical = 0
 script = ExtResource("6_btkyf")
 
 [node name="boss" parent="." instance=ExtResource("7_ebj6r")]
-position = Vector2(256, 0)
+position = Vector2(512, 512)
 
 [node name="player" parent="." instance=ExtResource("1_ye32a")]
-position = Vector2(-128, 0)
+position = Vector2(-512, -512)
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("2_ykh36")
 follow = NodePath("../player")
+
+[node name="bg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.247059)
+z_index = -4096
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_v5nmj")
+texture = ExtResource("6_pk3oy")
+region_enabled = true
+region_rect = Rect2(0, 0, 80960, 80960)
+script = ExtResource("7_xsa5q")
+vel = Vector2(128, 96)
+
+[node name="bg2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.247059)
+z_index = -4096
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_v5nmj")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_pk3oy")
+region_enabled = true
+region_rect = Rect2(0, 0, 80960, 80960)
+script = ExtResource("7_xsa5q")
+vel = Vector2(-42, -69)

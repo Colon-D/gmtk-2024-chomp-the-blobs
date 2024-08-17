@@ -1,0 +1,56 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=26 format=3 uid="uid://m6i36vuwqj0o"]
+
+[ext_resource type="AudioStream" uid="uid://di7id5f73khwb" path="res://sfx/mud/mud_01.ogg" id="1_vy1xx"]
+[ext_resource type="AudioStream" uid="uid://c7thavf120ysx" path="res://sfx/mud/mud_02.ogg" id="2_3tgq1"]
+[ext_resource type="AudioStream" uid="uid://b0vc0hlx7akqi" path="res://sfx/mud/mud_11.ogg" id="3_d61he"]
+[ext_resource type="AudioStream" uid="uid://dso758fyhb305" path="res://sfx/mud/mud_03.ogg" id="3_qfqhg"]
+[ext_resource type="AudioStream" uid="uid://cap50fjgbxmpn" path="res://sfx/mud/mud_04.ogg" id="4_prts6"]
+[ext_resource type="AudioStream" uid="uid://bb0wvjwksbmsv" path="res://sfx/mud/mud_12.ogg" id="4_rahcm"]
+[ext_resource type="AudioStream" uid="uid://c35j56bp5uc5" path="res://sfx/mud/mud_13.ogg" id="5_35bu6"]
+[ext_resource type="AudioStream" uid="uid://db2buu8kyshdi" path="res://sfx/mud/mud_14.ogg" id="6_ulx7w"]
+[ext_resource type="AudioStream" uid="uid://cr5vymjv3eirq" path="res://sfx/mud/mud_15.ogg" id="7_wi2lo"]
+[ext_resource type="AudioStream" uid="uid://ct7lkc17dtkqv" path="res://sfx/mud/mud_16.ogg" id="8_wlj8n"]
+[ext_resource type="AudioStream" uid="uid://bj2radgmhmnbx" path="res://sfx/mud/mud_17.ogg" id="9_0s6pi"]
+[ext_resource type="AudioStream" uid="uid://8sw55hnsy7nh" path="res://sfx/mud/mud_18.ogg" id="10_48f0y"]
+[ext_resource type="AudioStream" uid="uid://bkaa4dlhpshxp" path="res://sfx/mud/mud_19.ogg" id="11_mxv4p"]
+[ext_resource type="AudioStream" uid="uid://oq86fgy617eq" path="res://sfx/mud/mud_20.ogg" id="12_7oxss"]
+[ext_resource type="AudioStream" uid="uid://b05bij7gjmm6u" path="res://sfx/mud/mud_21.ogg" id="14_a2g75"]
+[ext_resource type="AudioStream" uid="uid://dwku6l4nadpq4" path="res://sfx/mud/mud_22.ogg" id="15_jga47"]
+[ext_resource type="AudioStream" uid="uid://t16w41ooqpx1" path="res://sfx/mud/mud_23.ogg" id="16_l4iky"]
+[ext_resource type="AudioStream" uid="uid://nf61xx1jn34b" path="res://sfx/mud/mud_24.ogg" id="17_u5rnq"]
+[ext_resource type="AudioStream" uid="uid://bbe3hqgrtsb5f" path="res://sfx/mud/mud_25.ogg" id="18_8hfff"]
+[ext_resource type="AudioStream" uid="uid://b3ha5s0pkkxsi" path="res://sfx/mud/mud_05.ogg" id="20_ujwmp"]
+[ext_resource type="AudioStream" uid="uid://q7naqgacu5v6" path="res://sfx/mud/mud_06.ogg" id="21_uejw0"]
+[ext_resource type="AudioStream" uid="uid://b4725dm6t36hb" path="res://sfx/mud/mud_07.ogg" id="22_i6pso"]
+[ext_resource type="AudioStream" uid="uid://6x3jr543lgpl" path="res://sfx/mud/mud_08.ogg" id="23_tbvvu"]
+[ext_resource type="AudioStream" uid="uid://dkbt1kel4cela" path="res://sfx/mud/mud_09.ogg" id="24_rsmop"]
+[ext_resource type="AudioStream" uid="uid://cx0lts7vwi3p" path="res://sfx/mud/mud_10.ogg" id="25_ux316"]
+
+[resource]
+random_pitch = 1.5
+streams_count = 25
+stream_0/stream = ExtResource("1_vy1xx")
+stream_1/stream = ExtResource("2_3tgq1")
+stream_2/stream = ExtResource("3_qfqhg")
+stream_3/stream = ExtResource("4_prts6")
+stream_4/stream = ExtResource("20_ujwmp")
+stream_5/stream = ExtResource("21_uejw0")
+stream_6/stream = ExtResource("22_i6pso")
+stream_7/stream = ExtResource("23_tbvvu")
+stream_8/stream = ExtResource("24_rsmop")
+stream_9/stream = ExtResource("25_ux316")
+stream_10/stream = ExtResource("3_d61he")
+stream_11/stream = ExtResource("4_rahcm")
+stream_12/stream = ExtResource("5_35bu6")
+stream_13/stream = ExtResource("6_ulx7w")
+stream_14/stream = ExtResource("7_wi2lo")
+stream_15/stream = ExtResource("8_wlj8n")
+stream_16/stream = ExtResource("9_0s6pi")
+stream_17/stream = ExtResource("10_48f0y")
+stream_18/stream = ExtResource("11_mxv4p")
+stream_19/stream = ExtResource("12_7oxss")
+stream_20/stream = ExtResource("14_a2g75")
+stream_21/stream = ExtResource("15_jga47")
+stream_22/stream = ExtResource("16_l4iky")
+stream_23/stream = ExtResource("17_u5rnq")
+stream_24/stream = ExtResource("18_8hfff")
