@@ -1,0 +1,48 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmc0n1p11jack"]
+
+[ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_7465j"]
+[ext_resource type="Script" path="res://circles/friend/player_movement.gd" id="2_fgo4x"]
+[ext_resource type="Script" path="res://circles/clamp.gd" id="3_7qnkq"]
+[ext_resource type="PackedScene" uid="uid://dlpc78i40rpyo" path="res://circles/enemy/enemy_old.tscn" id="3_repcj"]
+[ext_resource type="Script" path="res://circles/circle.gd" id="4_rwwuc"]
+[ext_resource type="Script" path="res://circles/friend/debug.gd" id="4_wjjg5"]
+[ext_resource type="Script" path="res://circles/consumer.gd" id="5_old16"]
+[ext_resource type="AudioStream" uid="uid://m6i36vuwqj0o" path="res://sfx/mud/mud.tres" id="7_ddi2l"]
+[ext_resource type="Script" path="res://circles/friend/play_mud.gd" id="8_bt23u"]
+[ext_resource type="AudioStream" uid="uid://cdus5jyjl108m" path="res://sfx/sea_and_river_sounds/trimmed.ogg" id="9_aromf"]
+[ext_resource type="Script" path="res://circles/friend/river.gd" id="10_bqgyn"]
+
+[node name="player" type="Node2D" groups=["circle", "player"]]
+material = ExtResource("1_7465j")
+script = ExtResource("4_rwwuc")
+radius = 32.0
+color = Color(0, 1, 1, 1)
+big_color = Color(1, 0.5, 0.5, 1)
+same_color = Color(1, 0.635294, 0.5, 1)
+small_color = Color(1, 0.823529, 0.5, 1)
+split_into = ExtResource("3_repcj")
+
+[node name="movement" type="Node" parent="."]
+script = ExtResource("2_fgo4x")
+
+[node name="clamp" type="Node" parent="."]
+script = ExtResource("3_7qnkq")
+
+[node name="debug" type="Node" parent="."]
+script = ExtResource("4_wjjg5")
+
+[node name="consumer" type="Node" parent="."]
+script = ExtResource("5_old16")
+
+[node name="mud" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ddi2l")
+script = ExtResource("8_bt23u")
+
+[node name="river" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_aromf")
+volume_db = -80.0
+autoplay = true
+script = ExtResource("10_bqgyn")
+
+[connection signal="on_split" from="." to="mud" method="on_split"]
+[connection signal="on_consume" from="consumer" to="mud" method="on_consume"]

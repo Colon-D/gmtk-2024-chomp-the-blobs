@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bedmi050ndlnq"]
+
+[ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_ai5dw"]
+[ext_resource type="Script" path="res://circles/circle.gd" id="1_vpgn4"]
+[ext_resource type="Script" path="res://circles/enemy/movement.gd" id="2_3ifsa"]
+[ext_resource type="Script" path="res://circles/consumer.gd" id="3_yuk6i"]
+[ext_resource type="AudioStream" uid="uid://m6i36vuwqj0o" path="res://sfx/mud/mud.tres" id="5_8aluo"]
+[ext_resource type="Script" path="res://circles/friend/play_mud.gd" id="5_ovcs0"]
+
+[node name="circle" type="Node2D" groups=["circle"]]
+material = ExtResource("1_ai5dw")
+script = ExtResource("1_vpgn4")
+radius = 32.0
+big_color = Color(1, 0.5, 0.5, 1)
+same_color = Color(1, 0.635294, 0.5, 1)
+small_color = Color(1, 0.823529, 0.5, 1)
+
+[node name="movement" type="Node" parent="."]
+script = ExtResource("2_3ifsa")
+
+[node name="consumer" type="Node" parent="."]
+script = ExtResource("3_yuk6i")
+
+[node name="mud" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8aluo")
+script = ExtResource("5_ovcs0")
+
+[connection signal="on_split" from="." to="mud" method="on_split"]
+[connection signal="on_consume" from="consumer" to="mud" method="on_consume"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxj1xjte5q74m"]
+
+[ext_resource type="PackedScene" uid="uid://bedmi050ndlnq" path="res://circles/circle.tscn" id="1_bq4gs"]
+[ext_resource type="Material" uid="uid://b0jh6ebkn6sn" path="res://circles/enemy/spike.tres" id="2_bcari"]
+[ext_resource type="PackedScene" uid="uid://cbwn4nl4tl7yn" path="res://circles/enemy/enemy.tscn" id="3_2kgql"]
+[ext_resource type="Script" path="res://circles/clamp.gd" id="4_m32qv"]
+
+[node name="spike" groups=["spike"] instance=ExtResource("1_bq4gs")]
+material = ExtResource("2_bcari")
+small_color = Color(0.625, 0.5, 1, 1)
+split_into = ExtResource("3_2kgql")
+
+[node name="clamp" type="Node" parent="." index="3"]
+script = ExtResource("4_m32qv")
+
+[connection signal="edge" from="clamp" to="movement" method="bounce"]
+[connection signal="edge" from="clamp" to="mud" method="edge"]

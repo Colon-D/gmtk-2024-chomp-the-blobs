@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7pbbfyaw06a0"]
+
+[ext_resource type="Script" path="res://menu/how_to_play.gd" id="1_cnp83"]
+[ext_resource type="Theme" uid="uid://b0p0ob7fjocdi" path="res://menu/theme.tres" id="2_i3lpe"]
+[ext_resource type="Script" path="res://menu/grab_focus.gd" id="3_rfgx5"]
+[ext_resource type="Texture2D" uid="uid://dklluqmulsp3v" path="res://water.jpg" id="6_5bwbw"]
+[ext_resource type="Script" path="res://scroll_bg.gd" id="7_ywpaq"]
+[ext_resource type="AudioStream" uid="uid://d2jlut6qtmfh5" path="res://sfx/drop.ogg" id="8_ewal2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6g0k"]
+blend_mode = 1
+
+[node name="how_to_play" type="Node2D"]
+script = ExtResource("1_cnp83")
+menu_scene = "res://menu/menu.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="back" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_i3lpe")
+text = "back
+"
+script = ExtResource("3_rfgx5")
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_i3lpe")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_i3lpe")
+text = "Game by Lily ❤️
+
+Sounds:
+- Water splash & drops 3: giddster
+- Sea and river wave sounds: RandomMind
+- 25 CC0 mud sfx: rubberduck
+
+Font:
+  Kenney Future: Kenney
+
+Water Texture:
+  Clear sea water: the3rdSequence
+  www.the3rdsequence.com
+  /texturedb/texture/44/clear+sea+water
+  creativecommons.org/licenses/by/4.0/
+"
+
+[node name="bg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.247059)
+z_index = -4096
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_n6g0k")
+texture = ExtResource("6_5bwbw")
+region_enabled = true
+region_rect = Rect2(0, 0, 80960, 80960)
+script = ExtResource("7_ywpaq")
+vel = Vector2(128, 96)
+
+[node name="bg2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.247059)
+z_index = -4096
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_n6g0k")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_5bwbw")
+region_enabled = true
+region_rect = Rect2(0, 0, 80960, 80960)
+script = ExtResource("7_ywpaq")
+vel = Vector2(-42, -69)
+
+[node name="drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ewal2")
+volume_db = -8.0
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/back" to="." method="on_back_pressed"]

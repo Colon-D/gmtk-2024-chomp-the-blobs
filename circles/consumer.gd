@@ -10,14 +10,10 @@ const i_size = 32
 signal on_consume(consumer, other)
 
 func consume(consumer, other):
+	other.on_consumed.emit()
 	other.queue_free()
 
-	var area = consumer.radius * consumer.radius * PI
-	var other_area = other.radius * other.radius * PI
-
-	area += other_area
-
-	consumer.radius = sqrt(area / PI)
+	consumer.area += other.area
 
 	on_consume.emit(consumer, other)
 
@@ -29,19 +25,23 @@ func _physics_process(_delta: float) -> void:
 
 	for i in range(i_cont, min(circles.size(), i_cont + i_size), 1):
 		var other = circles[i]
-		if other == self:
+		if other == circle:
 			continue
 		
-		var ratio = circle.radius / other.radius
 		# needs to be 25% bigger in radius (should this be area?)
-		if ratio < 1.25:
+		# spikes don't have this ratio requirement
+		if circle.get_relative_size(other) != circle.relative_size.SMALL:
 			continue;
 
 		var distance = other.position.distance_to(circle.position)
 		# needs to be over 50% consumed, thus other radius is not added
 		if distance < circle.radius:
-			# don't want the boss to get eaten by itself
-			if other.is_in_group("boss") and not circle.is_in_group("player"):
+			# spikes split circles, but are still consumed
+			if other.is_in_group("spike"):
+				consume(circle, other)
+				circle.call_deferred("explode")
+			# don't want the boss to get eaten by its own attacks
+			elif other.is_in_group("boss") and not circle.is_in_group("player"):
 				other.position = circle.position
 				consume(other, circle)
 			else:

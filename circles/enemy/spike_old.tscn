@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3ngolwyhn4gv"]
+
+[ext_resource type="Shader" path="res://circles/enemy/spike.gdshader" id="1_psis4"]
+[ext_resource type="Script" path="res://circles/circle.gd" id="1_ytvaq"]
+[ext_resource type="Script" path="res://circles/consumer.gd" id="4_e7wnh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjdsp"]
+shader = ExtResource("1_psis4")
+
+[node name="spike" type="Node2D" groups=["circle", "enemy", "spike"]]
+material = SubResource("ShaderMaterial_mjdsp")
+script = ExtResource("1_ytvaq")
+radius = 32.0
+big_color = Color(1, 0.498039, 0.498039, 1)
+small_color = Color(0.791667, 0.5, 1, 1)
+
+[node name="consumer" type="Node" parent="."]
+script = ExtResource("4_e7wnh")

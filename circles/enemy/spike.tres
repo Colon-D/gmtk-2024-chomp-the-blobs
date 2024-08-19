@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b0jh6ebkn6sn"]
+
+[ext_resource type="Shader" path="res://circles/enemy/spike.gdshader" id="1_uqfr2"]
+
+[resource]
+shader = ExtResource("1_uqfr2")

@@ -1,12 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://ugek5474byb7"]
+[gd_scene load_steps=14 format=3 uid="uid://ugek5474byb7"]
 
-[ext_resource type="PackedScene" uid="uid://dmc0n1p11jack" path="res://circles/friend/player.tscn" id="1_ye32a"]
+[ext_resource type="PackedScene" uid="uid://da3dx8cedm5un" path="res://circles/friend/player.tscn" id="1_ye32a"]
 [ext_resource type="Script" path="res://circles/friend/player_camera.gd" id="2_ykh36"]
 [ext_resource type="Script" path="res://boundary.gd" id="3_5w352"]
+[ext_resource type="Theme" uid="uid://b0p0ob7fjocdi" path="res://menu/theme.tres" id="3_8a1wp"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="3_tr0xa"]
+[ext_resource type="Script" path="res://stopwatch.gd" id="5_a4u5m"]
+[ext_resource type="PackedScene" uid="uid://drphghpukokra" path="res://circles/enemy/boss.tscn" id="6_4450y"]
+[ext_resource type="AudioStream" uid="uid://d2jlut6qtmfh5" path="res://sfx/drop.ogg" id="6_axp37"]
 [ext_resource type="Script" path="res://fps.gd" id="6_btkyf"]
 [ext_resource type="Texture2D" uid="uid://dklluqmulsp3v" path="res://water.jpg" id="6_pk3oy"]
-[ext_resource type="PackedScene" uid="uid://drphghpukokra" path="res://circles/enemy/boss.tscn" id="7_ebj6r"]
 [ext_resource type="Script" path="res://scroll_bg.gd" id="7_xsa5q"]
+[ext_resource type="PackedScene" uid="uid://bxj1xjte5q74m" path="res://circles/enemy/spike.tscn" id="8_om5nk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v5nmj"]
 blend_mode = 1
@@ -22,6 +27,7 @@ size = Vector2(2048, 2048)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="fps" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,15 +37,81 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("6_btkyf")
 
-[node name="boss" parent="." instance=ExtResource("7_ebj6r")]
-position = Vector2(512, 512)
+[node name="ui" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="player" parent="." instance=ExtResource("1_ye32a")]
-position = Vector2(-512, -512)
+[node name="center" type="CenterContainer" parent="CanvasLayer/ui"]
+process_mode = 3
+layout_mode = 2
 
-[node name="camera" type="Camera2D" parent="."]
-script = ExtResource("2_ykh36")
-follow = NodePath("../player")
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/ui/center"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_8a1wp")
+
+[node name="pause_menu" type="VBoxContainer" parent="CanvasLayer/ui/center/Panel"]
+visible = false
+layout_mode = 2
+script = ExtResource("3_tr0xa")
+menu_scene = "res://menu/menu.tscn"
+
+[node name="label" type="Label" parent="CanvasLayer/ui/center/Panel/pause_menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_8a1wp")
+text = "Paused"
+
+[node name="return" type="Button" parent="CanvasLayer/ui/center/Panel/pause_menu"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+theme = ExtResource("3_8a1wp")
+text = "return"
+
+[node name="restart" type="Button" parent="CanvasLayer/ui/center/Panel/pause_menu"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+theme = ExtResource("3_8a1wp")
+text = "restart"
+
+[node name="menu" type="Button" parent="CanvasLayer/ui/center/Panel/pause_menu"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+theme = ExtResource("3_8a1wp")
+text = "menu"
+
+[node name="drop" type="AudioStreamPlayer" parent="CanvasLayer/ui/center/Panel/pause_menu"]
+stream = ExtResource("6_axp37")
+volume_db = -8.0
+autoplay = true
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/ui"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_8a1wp")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ui/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="stopwatch" type="Label" parent="CanvasLayer/ui/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_8a1wp")
+script = ExtResource("5_a4u5m")
 
 [node name="bg" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.247059)
@@ -63,3 +135,41 @@ region_enabled = true
 region_rect = Rect2(0, 0, 80960, 80960)
 script = ExtResource("7_xsa5q")
 vel = Vector2(-42, -69)
+
+[node name="player" parent="." instance=ExtResource("1_ye32a")]
+position = Vector2(-512, -512)
+
+[node name="camera" type="Camera2D" parent="."]
+script = ExtResource("2_ykh36")
+follow = NodePath("../player")
+
+[node name="spike" parent="." instance=ExtResource("8_om5nk")]
+position = Vector2(512, -512)
+radius = 64.0
+color = Color(1, 0.5, 0.5, 1)
+
+[node name="spike2" parent="." instance=ExtResource("8_om5nk")]
+position = Vector2(-512, 512)
+radius = 64.0
+color = Color(1, 0.5, 0.5, 1)
+
+[node name="spike3" parent="." instance=ExtResource("8_om5nk")]
+position = Vector2(-256, -256)
+radius = 48.0
+color = Color(1, 0.5, 0.5, 1)
+
+[node name="boss" parent="." instance=ExtResource("6_4450y")]
+position = Vector2(512, 512)
+
+[connection signal="on_pause" from="CanvasLayer/ui/center/Panel/pause_menu" to="CanvasLayer/ui/center/Panel/pause_menu/drop" method="play"]
+[connection signal="on_unpause" from="CanvasLayer/ui/center/Panel/pause_menu" to="CanvasLayer/ui/center/Panel/pause_menu/drop" method="play"]
+[connection signal="pressed" from="CanvasLayer/ui/center/Panel/pause_menu/return" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/ui/center/Panel/pause_menu/restart" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ui/center/Panel/pause_menu/menu" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_menu_pressed"]
+[connection signal="tree_exiting" from="CanvasLayer/ui/Panel/MarginContainer/stopwatch" to="CanvasLayer/ui/Panel/MarginContainer/stopwatch" method="save_to_file"]
+[connection signal="on_consumed" from="player" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_lose"]
+[connection signal="on_split" from="player" to="player/mud" method="on_split"]
+[connection signal="on_split" from="spike" to="spike/mud" method="on_split"]
+[connection signal="on_split" from="spike2" to="spike2/mud" method="on_split"]
+[connection signal="on_split" from="spike3" to="spike3/mud" method="on_split"]
+[connection signal="on_consumed" from="boss" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_win"]
