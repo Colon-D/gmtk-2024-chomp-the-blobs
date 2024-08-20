@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbwn4nl4tl7yn"]
+[gd_scene load_steps=4 format=3 uid="uid://cbwn4nl4tl7yn"]
 
 [ext_resource type="PackedScene" uid="uid://bedmi050ndlnq" path="res://circles/circle.tscn" id="1_mawmp"]
 [ext_resource type="Script" path="res://circles/clamp.gd" id="3_msb3a"]
+[ext_resource type="Script" path="res://circles/enemy2/drain.gd" id="3_rd217"]
 
 [node name="enemy" groups=["enemy"] instance=ExtResource("1_mawmp")]
 color = Color(1, 0.498039, 0.498039, 1)
@@ -9,5 +10,11 @@ color = Color(1, 0.498039, 0.498039, 1)
 [node name="clamp" type="Node" parent="." index="3"]
 script = ExtResource("3_msb3a")
 
+[node name="drain" type="Node" parent="." index="4"]
+script = ExtResource("3_rd217")
+drain_mult = 0.5
+
+[connection signal="on_split" from="." to="mud" method="on_split"]
+[connection signal="on_consume" from="consumer" to="mud" method="on_consume"]
 [connection signal="edge" from="clamp" to="movement" method="bounce"]
 [connection signal="edge" from="clamp" to="mud" method="edge"]

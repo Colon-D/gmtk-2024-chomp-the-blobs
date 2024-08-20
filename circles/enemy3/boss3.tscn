@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbm034suoewoh"]
+
+[ext_resource type="PackedScene" uid="uid://bedmi050ndlnq" path="res://circles/circle.tscn" id="1_r7y0c"]
+[ext_resource type="PackedScene" uid="uid://dinun7b3hr8fr" path="res://circles/enemy3/enemy3.tscn" id="2_86du1"]
+[ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="2_dvxk3"]
+[ext_resource type="Script" path="res://circles/enemy3/boss3_attack.gd" id="2_jx8wd"]
+[ext_resource type="Script" path="res://circles/enemy3/dampening.gd" id="3_0exgt"]
+[ext_resource type="Script" path="res://circles/clamp.gd" id="5_dm53d"]
+[ext_resource type="PackedScene" uid="uid://bxj1xjte5q74m" path="res://circles/enemy/spike.tscn" id="6_wh3pa"]
+
+[node name="boss3" groups=["boss", "enemy"] instance=ExtResource("1_r7y0c")]
+radius = 512.0
+split_into = ExtResource("2_86du1")
+
+[node name="dampening" type="Node" parent="movement" index="0"]
+script = ExtResource("3_0exgt")
+
+[node name="boss3_attack" type="Node2D" parent="." index="3"]
+show_behind_parent = true
+material = ExtResource("2_dvxk3")
+rotation = 43.4207
+script = ExtResource("2_jx8wd")
+spike_shot = ExtResource("6_wh3pa")
+
+[node name="clamp" type="Node" parent="." index="4"]
+script = ExtResource("5_dm53d")
+
+[connection signal="on_split" from="." to="mud" method="on_split"]
+[connection signal="on_consume" from="consumer" to="mud" method="on_consume"]
+[connection signal="edge" from="clamp" to="movement" method="bounce"]

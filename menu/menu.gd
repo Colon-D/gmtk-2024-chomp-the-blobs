@@ -1,11 +1,19 @@
 extends Node
 
 @export_file var gameplay_scene: String
+@export_file var gameplay_scene2: String
+@export_file var gameplay_scene3: String
 @export_file var how_to_play_scene: String
 @export_file var credits_scene: String
 
 func on_play_pressed() -> void:
 	get_tree().change_scene_to_file(gameplay_scene)
+
+func on_play2_pressed() -> void:
+	get_tree().change_scene_to_file(gameplay_scene2)
+
+func on_play3_pressed() -> void:
+	get_tree().change_scene_to_file(gameplay_scene3)
 
 func on_toggle_fullscreen_pressed() -> void:
 	var mode = DisplayServer.window_get_mode()
@@ -23,12 +31,12 @@ func on_how_to_play_pressed() -> void:
 	get_tree().change_scene_to_file(how_to_play_scene)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("ui_up")\
-		or event.is_action_released("ui_down")\
-		or event.is_action_released("ui_left")\
-		or event.is_action_released("ui_right"):
+	# analog sticks are buggy, sorry :(
+	if event.is_action_pressed("ui_up")\
+		or event.is_action_pressed("ui_down")\
+		or event.is_action_pressed("ui_left")\
+		or event.is_action_pressed("ui_right"):
 		$drop.play()
-
 
 func on_credits_pressed() -> void:
 	get_tree().change_scene_to_file(credits_scene)

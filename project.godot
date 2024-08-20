@@ -26,6 +26,8 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://circles/": "green",
 "res://circles/enemy/": "red",
+"res://circles/enemy2/": "orange",
+"res://circles/enemy3/": "yellow",
 "res://circles/friend/": "blue",
 "res://menu/": "yellow"
 }

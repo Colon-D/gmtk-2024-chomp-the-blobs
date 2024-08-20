@@ -1,10 +1,12 @@
 extends Label
 
+@export var boss_name: String
+
 func _ready() -> void:
 	load_from_file()
 
 func load_from_file() -> void:
-	var file = FileAccess.open("user://game.save", FileAccess.READ)
+	var file = FileAccess.open("user://" + boss_name + ".save", FileAccess.READ)
 	if file == null:
 		return
 

@@ -7,4 +7,4 @@ func _physics_process(_delta: float) -> void:
 	if follow_node == null:
 		return
 	position = follow_node.position
-	zoom = 48 * Vector2.ONE / follow_node.radius
+	#zoom = 24 * Vector2.ONE / follow_node.radius

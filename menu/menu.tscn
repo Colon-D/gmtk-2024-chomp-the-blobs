@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1c6s2ubi4s14"]
+[gd_scene load_steps=12 format=3 uid="uid://b1c6s2ubi4s14"]
 
 [ext_resource type="Theme" uid="uid://b0p0ob7fjocdi" path="res://menu/theme.tres" id="1_2s831"]
 [ext_resource type="Script" path="res://menu/menu.gd" id="1_64vu6"]
 [ext_resource type="Texture2D" uid="uid://dklluqmulsp3v" path="res://water.jpg" id="2_4uski"]
+[ext_resource type="Texture2D" uid="uid://bkywbgyceqou3" path="res://logo.png" id="2_l2uwx"]
 [ext_resource type="Script" path="res://menu/grab_focus.gd" id="2_wha06"]
 [ext_resource type="Script" path="res://scroll_bg.gd" id="3_04q4x"]
 [ext_resource type="Script" path="res://menu/best_time.gd" id="4_2xa7r"]
 [ext_resource type="Script" path="res://menu/free_on_web.gd" id="5_lrrnt"]
+[ext_resource type="Script" path="res://menu/volume_slider.gd" id="6_vu4iu"]
 [ext_resource type="AudioStream" uid="uid://d2jlut6qtmfh5" path="res://sfx/drop.ogg" id="7_w642u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u4j1d"]
@@ -14,7 +16,9 @@ blend_mode = 1
 
 [node name="menu" type="Node2D"]
 script = ExtResource("1_64vu6")
-gameplay_scene = "res://gameplay.tscn"
+gameplay_scene = "res://gameplay1.tscn"
+gameplay_scene2 = "res://gameplay2.tscn"
+gameplay_scene3 = "res://gameplay3.tscn"
 how_to_play_scene = "res://menu/how_to_play.tscn"
 credits_scene = "res://menu/credits.tscn"
 
@@ -30,6 +34,13 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 384)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_l2uwx")
+expand_mode = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1024, 0)
 layout_mode = 2
@@ -38,7 +49,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_2s831")
-text = "play"
+text = "boss: Blobby"
 script = ExtResource("2_wha06")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
@@ -51,6 +62,79 @@ theme = ExtResource("1_2s831")
 text = "not beaten"
 horizontal_alignment = 1
 script = ExtResource("4_2xa7r")
+boss_name = "blobby"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+
+[node name="play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2s831")
+text = "boss: Blorbit"
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer2/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_2s831")
+text = "not beaten"
+horizontal_alignment = 1
+script = ExtResource("4_2xa7r")
+boss_name = "blorbit"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+
+[node name="play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2s831")
+text = "boss: Blazer"
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer3/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_2s831")
+text = "not beaten"
+horizontal_alignment = 1
+script = ExtResource("4_2xa7r")
+boss_name = "blazer"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer4/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_2s831")
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="volume_slider" type="HSlider" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("1_2s831")
+max_value = 1.0
+step = 0.1
+script = ExtResource("6_vu4iu")
+
+[node name="toggle_fullscreen" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2s831")
+text = "Toggle Fullscreen"
 
 [node name="how_to_play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -61,11 +145,6 @@ text = "How to Play"
 layout_mode = 2
 theme = ExtResource("1_2s831")
 text = "Credits"
-
-[node name="toggle_fullscreen" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_2s831")
-text = "Toggle Fullscreen"
 
 [node name="quit" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -104,7 +183,9 @@ volume_db = -8.0
 autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer2/play" to="." method="on_play2_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer3/play" to="." method="on_play3_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/toggle_fullscreen" to="." method="on_toggle_fullscreen_pressed"]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/how_to_play" to="." method="on_how_to_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/credits" to="." method="on_credits_pressed"]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/toggle_fullscreen" to="." method="on_toggle_fullscreen_pressed"]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/quit" to="." method="on_quit_pressed"]

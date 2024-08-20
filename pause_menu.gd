@@ -32,10 +32,11 @@ func _input(event):
 		$return.grab_focus()
 
 	if get_tree().paused and (\
-		event.is_action_released("ui_up")\
-		or event.is_action_released("ui_down")\
-		or event.is_action_released("ui_left")\
-		or event.is_action_released("ui_right")):
+		# analog sticks are buggy, sorry :(
+		event.is_action_pressed("ui_up")\
+		or event.is_action_pressed("ui_down")\
+		or event.is_action_pressed("ui_left")\
+		or event.is_action_pressed("ui_right")):
 		$drop.play()
 
 func on_return_pressed() -> void:

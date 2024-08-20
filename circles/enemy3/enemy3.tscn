@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dinun7b3hr8fr"]
+
+[ext_resource type="PackedScene" uid="uid://bedmi050ndlnq" path="res://circles/circle.tscn" id="1_g2oa5"]
+[ext_resource type="Script" path="res://circles/enemy2/drain.gd" id="2_13k2p"]
+
+[node name="enemy3" instance=ExtResource("1_g2oa5")]
+big_color = Color(0, 0, 0, 1)
+same_color = Color(0.191667, 0.25, 0, 1)
+small_color = Color(0.764706, 1, 0, 1)
+
+[node name="drain" type="Node" parent="." index="3"]
+script = ExtResource("2_13k2p")

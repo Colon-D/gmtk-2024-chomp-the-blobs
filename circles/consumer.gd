@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 		var other = circles[i]
 		if other == circle:
 			continue
-		
+
 		# needs to be 25% bigger in radius (should this be area?)
 		# spikes don't have this ratio requirement
 		if circle.get_relative_size(other) != circle.relative_size.SMALL:

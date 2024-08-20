@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx3e4fh0febl6"]
+
+[ext_resource type="PackedScene" uid="uid://ugek5474byb7" path="res://gameplay.tscn" id="1_6nfuu"]
+[ext_resource type="PackedScene" uid="uid://cwb1q5xd0bvdl" path="res://circles/enemy2/boss2.tscn" id="2_updta"]
+
+[node name="gameplay" instance=ExtResource("1_6nfuu")]
+
+[node name="stopwatch" parent="CanvasLayer/ui/Panel/MarginContainer" index="0"]
+boss_name = "blorbit"
+
+[node name="boss2" parent="." index="6" instance=ExtResource("2_updta")]
+
+[connection signal="on_consumed" from="boss2" to="CanvasLayer/ui/center/Panel/pause_menu" method="on_win"]
+[connection signal="on_consumed" from="boss2" to="CanvasLayer/ui/Panel/MarginContainer/stopwatch" method="save_to_file"]

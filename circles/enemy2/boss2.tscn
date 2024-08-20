@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwb1q5xd0bvdl"]
+
+[ext_resource type="PackedScene" uid="uid://cbwn4nl4tl7yn" path="res://circles/enemy/enemy.tscn" id="1_41pey"]
+[ext_resource type="PackedScene" uid="uid://lfohlqmenkmq" path="res://circles/enemy2/enemy2.tscn" id="2_f0ove"]
+[ext_resource type="Script" path="res://circles/enemy2/enemy2_movement.gd" id="2_yjjtf"]
+[ext_resource type="Script" path="res://circles/enemy2/boss2_attack.gd" id="4_4oesh"]
+[ext_resource type="Script" path="res://circles/circle_timer.gd" id="5_juexu"]
+[ext_resource type="PackedScene" uid="uid://bxj1xjte5q74m" path="res://circles/enemy/spike.tscn" id="5_mill1"]
+
+[node name="boss2" groups=["boss"] instance=ExtResource("1_41pey")]
+radius = 512.0
+color = Color(0.9, 0.9, 0.9, 1)
+split_into = ExtResource("2_f0ove")
+
+[node name="movement" parent="." index="0"]
+script = ExtResource("2_yjjtf")
+
+[node name="clamp" parent="." index="3"]
+script = null
+
+[node name="boss2_attack" type="Node" parent="." index="4"]
+script = ExtResource("4_4oesh")
+spike_shot = ExtResource("5_mill1")
+
+[node name="timer" type="Node" parent="boss2_attack" index="0"]
+script = ExtResource("5_juexu")
+wait_time = 0.02
+autostart = true
+
+[connection signal="timeout" from="boss2_attack/timer" to="boss2_attack" method="fire"]

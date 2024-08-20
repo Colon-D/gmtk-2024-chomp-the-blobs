@@ -50,6 +50,13 @@ func update_dt_mult():
 			color = same_color
 		queue_redraw()
 
+	# if too small, just redistribute size to boss
+	if radius < 8 and not is_in_group("boss"):
+		var bosses = get_tree().get_nodes_in_group("boss")
+		if bosses and bosses.size() != 0:
+			var boss = bosses[0]
+			boss.get_node("consumer").consume(boss, self)
+
 signal on_split(instance: Node)
 
 func explode(lose_ratio = 0.75, split_into_amount = 6):
@@ -82,13 +89,13 @@ func split_radius(instance_radius: float, angle: float, into: PackedScene):
 	instance.radius = instance_radius
 	area -= instance.area
 	instance.position = position
-	instance.position += Vector2.from_angle(angle) * radius * 1.01
+	instance.position += Vector2.from_angle(angle) * (radius + instance.radius)
 
 	get_parent().add_child(instance)
 	on_split.emit(instance)
 	return instance
 
-var debug_split_last_frame = true
+#var debug_split_last_frame = true
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		queue_redraw()
@@ -101,13 +108,13 @@ func _physics_process(_delta: float) -> void:
 		explode()
 		#instance.consume(instance, self)
 
-	if debug_split_last_frame:
-		if not Input.is_key_pressed(KEY_3):
-			debug_split_last_frame = false
-	else:
-		if Input.is_key_pressed(KEY_3):
-			debug_split_last_frame = true
-			explode()
+	#if debug_split_last_frame:
+	#	if not Input.is_key_pressed(KEY_3):
+	#		debug_split_last_frame = false
+	#else:
+	#	if Input.is_key_pressed(KEY_3):
+	#		debug_split_last_frame = true
+	#		explode()
 			#split_area(area / 2, 0, split_into)
 
 func _draw():

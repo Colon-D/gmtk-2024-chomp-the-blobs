@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drphghpukokra"]
+[gd_scene load_steps=13 format=3 uid="uid://drphghpukokra"]
 
 [ext_resource type="Material" uid="uid://diru3854wajpw" path="res://circles/circle.tres" id="1_1m1tn"]
 [ext_resource type="Script" path="res://circles/circle.gd" id="1_vrcms"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://circles/consumer.gd" id="4_dnj2b"]
 [ext_resource type="PackedScene" uid="uid://bxj1xjte5q74m" path="res://circles/enemy/spike.tscn" id="5_co3kr"]
 [ext_resource type="Script" path="res://circles/circle_timer.gd" id="5_q0os7"]
+[ext_resource type="PackedScene" uid="uid://dinun7b3hr8fr" path="res://circles/enemy3/enemy3.tscn" id="6_sj18n"]
 [ext_resource type="Script" path="res://circles/enemy/movement.gd" id="6_y7aep"]
 [ext_resource type="Script" path="res://circles/clamp.gd" id="7_jwb2p"]
 [ext_resource type="AudioStream" uid="uid://m6i36vuwqj0o" path="res://sfx/mud/mud.tres" id="9_e5y3t"]
@@ -25,6 +26,7 @@ split_into = ExtResource("3_efvt0")
 [node name="boss_attack" type="Node" parent="."]
 script = ExtResource("2_iamu3")
 spike_shot = ExtResource("5_co3kr")
+enemy3_shot = ExtResource("6_sj18n")
 
 [node name="timer" type="Node" parent="boss_attack"]
 script = ExtResource("5_q0os7")
@@ -36,7 +38,7 @@ script = ExtResource("4_dnj2b")
 
 [node name="movement" type="Node" parent="."]
 script = ExtResource("6_y7aep")
-speed = 1024.0
+speed = 768.0
 angle = 0.524
 
 [node name="clamp" type="Node" parent="."]
